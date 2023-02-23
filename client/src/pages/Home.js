@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import NewsForm from "../components/NewsForm";
+import NewsList from "../components/NewsList";
 
 export default function ButtonAppBar() {
   return (
@@ -33,6 +34,11 @@ export default function ButtonAppBar() {
       <div align="center">
         <NewsForm />
       </div>
+
+      <div align="center">
+        <NewsList/>
+      </div>
+
     </main>
   );
 }
