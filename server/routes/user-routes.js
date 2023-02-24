@@ -28,3 +28,35 @@ router.get("/users", (req, res) => {
     }
   });
 });
+
+// GET - specific user's messages
+router.get("/users/:username", (req, res) => {
+    console.log(`Querying for message(s) from ${req.params.username}.`);
+    const params = {
+      TableName: table,
+      //Retrieve all messages from a specific user
+      KeyConditionExpression: "#un = :user",
+      ExpressionAttributeNames: {
+        "#un": "username",
+        "#ca": "createdAt",
+        "#msg": "message",
+        "#img": "image"
+      },
+      ExpressionAttributeValues: {
+        ":user": req.params.username,
+      },
+      ProjectionExpression: "#un, #msg, #ca, #img",
+      ScanIndexForward: false,
+    };
+    dynamodb.query(params, (err, data) => {
+      if (err) {
+        console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+        res.status(500).json(err); // an error occurred
+      } else {
+        console.log("Query succeeded.");
+        res.json(data.Items);
+      }
+    });
+  });
+
+module.exports = router;
