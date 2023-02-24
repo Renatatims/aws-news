@@ -13,7 +13,7 @@ import ShareIcon from '@mui/icons-material/Share';
 
 
 
-export default function RecipeReviewCard() {
+export default function MessageCard() {
   
   return (
     <Card sx={{ maxWidth: 345 }}>
