@@ -1,0 +1,17 @@
+[
+  {
+    "username": "Renata",
+    "createdAt": 1648322400,
+    "message": "Message 1"
+  },
+  {
+    "username": "Tims",
+    "createdAt": 1648292700,
+    "message": "Message 2"
+  },
+  {
+    "username": "Rondon",
+    "createdAt": 1648292703,
+    "message": "Message 3"
+  }
+]
