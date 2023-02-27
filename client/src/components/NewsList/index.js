@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import { Link } from "react-router-dom";
 
 const MessageCard = ({ messages, title }) => {
   if (!messages.length) {
@@ -32,6 +33,15 @@ const MessageCard = ({ messages, title }) => {
               title={message.username}
               
             />
+            <p className="card-header">
+              <Link
+                to={`/profile/${message.username}`}
+                style={{ fontWeight: 500 }}
+              >
+                {message.username}'s message on{" "}
+                {new Date(parseInt(message.createdAt)).toString()}
+              </Link>{" "}
+            </p>
             <CardMedia
               component="img"
               height="300"
