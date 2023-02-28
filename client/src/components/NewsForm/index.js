@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//import react hooks useState and useRef
+import React, { useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
@@ -16,6 +17,9 @@ const NewsForm = () => {
   //Count characters
   const [characterCount, setCharacterCount] = useState(0);
 
+  //initial value of fileInput set to null - this ensures that the reference to the DOM element is current
+  const fileInput = useRef(null);
+
   // update state based on form input changes
   const handleChange = (event) => {
     if (event.target.value.length <= 250) {
@@ -28,8 +32,8 @@ const NewsForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-     //POST - new message - Fetch function - send the form data to the endpoint in the body of the request
-     const postData = async () => {
+    //POST - new message - Fetch function - send the form data to the endpoint in the body of the request
+    const postData = async () => {
       const res = await fetch("/api/users", {
         method: "POST",
         headers: {
@@ -47,11 +51,17 @@ const NewsForm = () => {
     setCharacterCount(0);
   };
 
+  //handleImageUpload function - Upload image button - retrieves the image file uploaded by the user
+  const handleImageUpload = (event) => {
+    event.preventDefault();
+    const data = new FormData();
+    data.append('image', fileInput.current.files[0]);
+    // send image file to endpoint with the postImage function
+  };
+
   return (
     <div>
-      <p >
-        Character Count: {characterCount}/250
-      </p>
+      <p>Character Count: {characterCount}/250</p>
       <form onSubmit={handleFormSubmit}>
         <Box
           sx={{
@@ -100,8 +110,11 @@ const NewsForm = () => {
               aria-label="upload picture"
               component="label"
             >
-              <input hidden accept="image/*" type="file" />
+              <input hidden accept="image/*" type="file" ref={fileInput} />
               <PhotoCamera />
+              <Button variant="contained" type="submit" onClick={handleImageUpload}>
+                Upload
+              </Button>
             </IconButton>
           </Stack>
         </Box>
