@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,7 +10,30 @@ import NewsForm from "../components/NewsForm";
 import NewsList from "../components/NewsList";
 
 export default function ButtonAppBar() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/users");
+        const jsonData = await res.json();
+        const _data = jsonData.sort((a, b) =>
+          a.createdAt < b.createdAt ? 1 : -1
+        );
+        setMessages([..._data]);
+        
+        setIsLoaded(true);
+        console.log(res);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
+    <>
     <main>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -31,14 +54,24 @@ export default function ButtonAppBar() {
           </Toolbar>
         </AppBar>
       </Box>
-      <div align="center">
-        <NewsForm />
-      </div>
+      <div>
+        <div align="center">
+          <NewsForm />
+        </div>
 
-      <div align="center">
-        <NewsList/>
+        <div align="center">
+          {!isLoaded ? (
+            <div>Loading...</div>
+          ) : (
+            <NewsList
+              messages={messages}
+              setMessages={setMessages}
+              title="News Feed..."
+            />
+          )}
+        </div>
       </div>
-
     </main>
+    </>
   );
 }
