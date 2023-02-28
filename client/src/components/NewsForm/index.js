@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
-import FormControl from "@mui/material/FormControl";
 
 const NewsForm = () => {
   const [formState, setFormState] = useState({
@@ -28,6 +27,22 @@ const NewsForm = () => {
   // submit form
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
+     //POST - new message - Fetch function - send the form data to the endpoint in the body of the request
+     const postData = async () => {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+      const data = await res.json();
+      console.log(data);
+    };
+    postData();
+
     setFormState({ username: "", message: "" });
     setCharacterCount(0);
   };
@@ -37,7 +52,7 @@ const NewsForm = () => {
       <p >
         Character Count: {characterCount}/250
       </p>
-      <FormControl onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <Box
           sx={{
             width: 500,
@@ -77,7 +92,7 @@ const NewsForm = () => {
               p: 1,
             }}
           >
-            <Button variant="contained" component="label" type="submit">
+            <Button variant="contained" type="submit">
               Submit
             </Button>
             <IconButton
@@ -90,7 +105,7 @@ const NewsForm = () => {
             </IconButton>
           </Stack>
         </Box>
-      </FormControl>
+      </form>
     </div>
   );
 };
