@@ -26,7 +26,7 @@ const MessageCard = ({ messages, title }) => {
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  R
+                  {message.username[0]}
                 </Avatar>
               }
               
@@ -42,12 +42,14 @@ const MessageCard = ({ messages, title }) => {
                 {new Date(parseInt(message.createdAt)).toString()}
               </Link>{" "}
             </p>
+            {message.image && (
             <CardMedia
               component="img"
               height="300"
-              src={require("./placeholder.jpg")}
+              src={message.image}
               alt="image"
             />
+            )}
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {message.message}
