@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,9 +13,12 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
 const MessageCard = ({ messages, title }) => {
+      //upvote Comments
+      const [upvotes, setUpvotes] = useState(0);
   if (!messages.length) {
     return <h3>No News Yet</h3>;
   }
+
 
   return (
     <div>
@@ -60,7 +63,7 @@ const MessageCard = ({ messages, title }) => {
                 </CardContent>
                 <CardActions disableSpacing>
                   <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                    <FavoriteIcon onClick={() => setUpvotes(upvotes + 1)} />
                   </IconButton>
                   <IconButton aria-label="share">
                     <ShareIcon />

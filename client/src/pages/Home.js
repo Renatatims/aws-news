@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+
+// Material UI imports
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import ImageList from "@mui/material/ImageList";
+
+//Imports - Components 
 import NewsForm from "../components/NewsForm";
 import NewsList from "../components/NewsList";
+
 
 export default function ButtonAppBar() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,7 +37,7 @@ export default function ButtonAppBar() {
   }, []);
   return (
     <>
-      <main>
+      <main style = {{backgroundColor:"#e0e0e0"}}>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" sx={{ bgcolor: "#a594c7" }}>
             <Toolbar>
@@ -45,10 +50,19 @@ export default function ButtonAppBar() {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                News
+              <ImageList variant="h6" component="div">
+                <a href = "/">
+                <img src={require("../assets/favicon/favicon.ico")} alt = "logo Tech News" width = "25">
+                </img>
+                </a>
+              </ImageList>
+              <a href = "/" style={{textDecoration: "none", color: "inherit"}}>
+              <Typography variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
+              AWS Tech News
               </Typography>
-              <Button color="inherit">Login</Button>
+              </a>
+              
+              {/*<Button color="inherit">Login</Button>*/}
             </Toolbar>
           </AppBar>
         </Box>

@@ -78,8 +78,8 @@ const NewsForm = () => {
   };
 
   return (
-    <div >
-      <form onSubmit={handleFormSubmit} >
+    <div>
+      <form onSubmit={handleFormSubmit}>
         <Box
           sx={{
             width: 500,
@@ -89,11 +89,14 @@ const NewsForm = () => {
             pt: 2,
             pb: 2,
             m: 4,
-            boxShadow: 4
+            boxShadow: 4,
+            bgcolor: "#f5f5f5",
+            borderRadius: 2
           }}
         >
-          <Typography variant="h5" sx={{
+          <Typography variant="h7" sx={{
             color: "#a594c7",
+            fontWeight: "bold"
        
           }}> Message </Typography>
           <TextField
