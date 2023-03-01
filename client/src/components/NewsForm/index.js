@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 const NewsForm = () => {
   const [formState, setFormState] = useState({
@@ -55,19 +56,19 @@ const NewsForm = () => {
   const handleImageUpload = (event) => {
     event.preventDefault();
     const data = new FormData();
-    data.append('image', fileInput.current.files[0]);
+    data.append("image", fileInput.current.files[0]);
     // send image file to endpoint with the postImage function
     const postImage = async () => {
       try {
-        const res = await fetch('/api/image-upload', {
-          mode: 'cors',
-          method: 'POST',
+        const res = await fetch("/api/image-upload", {
+          mode: "cors",
+          method: "POST",
           body: data,
         });
         if (!res.ok) throw new Error(res.statusText);
         const postResponse = await res.json();
         setFormState({ ...formState, image: postResponse.Location });
-    
+
         return postResponse.Location;
       } catch (error) {
         console.log(error);
@@ -77,16 +78,24 @@ const NewsForm = () => {
   };
 
   return (
-    <div>
-      <p>Character Count: {characterCount}/250</p>
-      <form onSubmit={handleFormSubmit}>
+    <div >
+      <form onSubmit={handleFormSubmit} >
         <Box
           sx={{
             width: 500,
             maxWidth: "100%",
-            p: 4,
+            pl: 3.5,
+            pr: 5,
+            pt: 2,
+            pb: 2,
+            m: 4,
+            boxShadow: 4
           }}
         >
+          <Typography variant="h5" sx={{
+            color: "#a594c7",
+       
+          }}> Message </Typography>
           <TextField
             fullWidth
             label="Name"
@@ -111,6 +120,7 @@ const NewsForm = () => {
             rows={8}
             onChange={handleChange}
           />
+          <p>Character Count: {characterCount}/250</p>
           <Stack
             direction="row"
             alignItems="center"
@@ -119,20 +129,46 @@ const NewsForm = () => {
               p: 1,
             }}
           >
-            <Button variant="contained" type="submit">
-              Submit
-            </Button>
             <IconButton
-              color="primary"
+              color="#b9adcf"
               aria-label="upload picture"
               component="label"
             >
-              <input hidden accept="image/*" type="file" ref={fileInput} />
-              <PhotoCamera />
-              <Button variant="contained" type="submit" onClick={handleImageUpload}>
-                Upload
-              </Button>
+              <PhotoCamera
+                sx={{
+                  p: 0.5,
+                }}
+              />
+              <input accept="image/*" type="file" ref={fileInput} />
             </IconButton>
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={handleImageUpload}
+              sx={{
+                bgcolor: "#a594c7",
+                boxShadow: 4, 
+                ":hover": {
+                  bgcolor: "#7b6eac",
+                },
+              }}
+            >
+              Upload
+            </Button>
+
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{
+                bgcolor: "#a594c7",
+                boxShadow: 4,
+                ":hover": {
+                  bgcolor: "#7b6eac",
+                },
+              }}
+            >
+              Submit
+            </Button>
           </Stack>
         </Box>
       </form>

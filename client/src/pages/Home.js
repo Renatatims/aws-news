@@ -22,10 +22,8 @@ export default function ButtonAppBar() {
           a.createdAt < b.createdAt ? 1 : -1
         );
         setMessages([..._data]);
-        
         setIsLoaded(true);
         console.log(res);
-        
       } catch (error) {
         console.log(error);
       }
@@ -34,44 +32,44 @@ export default function ButtonAppBar() {
   }, []);
   return (
     <>
-    <main>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
-            </Typography>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
-      <div>
-        <div align="center">
-          <NewsForm />
-        </div>
+      <main>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static" sx={{ bgcolor: "#a594c7" }}>
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                News
+              </Typography>
+              <Button color="inherit">Login</Button>
+            </Toolbar>
+          </AppBar>
+        </Box>
+        <div>
+          <div align="center">
+            <NewsForm />
+          </div>
 
-        <div align="center">
-          {!isLoaded ? (
-            <div>Loading...</div>
-          ) : (
-            <NewsList
-              messages={messages}
-              setMessages={setMessages}
-              title="News Feed..."
-            />
-          )}
+          <div align="center">
+            {!isLoaded ? (
+              <div>Loading...</div>
+            ) : (
+              <NewsList
+                messages={messages}
+                setMessages={setMessages}
+                title="News Feed..."
+              />
+            )}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
     </>
   );
 }

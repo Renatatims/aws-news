@@ -7,7 +7,6 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { Link } from "react-router-dom";
@@ -25,10 +24,13 @@ const MessageCard = ({ messages, title }) => {
         {messages &&
           messages.map((message) => (
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ maxWidth: 345 }} key={message.createdAt}>
+              <Card
+                sx={{ maxWidth: 345, boxShadow: 8 }}
+                key={message.createdAt}
+              >
                 <CardHeader
                   avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar sx={{ bgcolor: "grey" }} aria-label="recipe">
                       {message.username[0]}
                     </Avatar>
                   }
