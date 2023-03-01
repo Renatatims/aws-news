@@ -13,12 +13,24 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
 const MessageCard = ({ messages, title }) => {
-      //upvote Comments
-      const [upvotes, setUpvotes] = useState(0);
+  //shareContent
+  const shareContent = {
+    text: messages,
+  };
+
+  const handleShareClick = async () => {
+    try {
+      await navigator.share(shareContent);
+      console.log("Content shared successfully!");
+    } catch (error) {
+      console.error("Error sharing", error);
+    }
+  };
+  //upvote Comments
+  const [upvotes, setUpvotes] = useState(0);
   if (!messages.length) {
     return <h3>No News Yet</h3>;
   }
-
 
   return (
     <div>
@@ -66,7 +78,7 @@ const MessageCard = ({ messages, title }) => {
                     <FavoriteIcon onClick={() => setUpvotes(upvotes + 1)} />
                   </IconButton>
                   <IconButton aria-label="share">
-                    <ShareIcon />
+                    <ShareIcon onClick={handleShareClick} />
                   </IconButton>
                 </CardActions>
               </Card>
