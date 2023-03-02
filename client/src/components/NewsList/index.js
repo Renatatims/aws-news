@@ -45,19 +45,27 @@ const MessageCard = ({ messages, title }) => {
               >
                 <CardHeader
                   avatar={
-                    <Avatar sx={{ bgcolor: "grey" }} aria-label="recipe">
-                      {message.username[0]}
-                    </Avatar>
+                    <a href={`/profile/${message.username}`} style={{ textDecoration: "none" }}>
+                      <Avatar sx={{ bgcolor: "grey" }} aria-label="user inital">
+                        {message.username[0]}
+                      </Avatar>
+                    </a>
                   }
-                  title={message.username}
+                  title={
+                    <h3>
+                      <a href={`/profile/${message.username}`} style={{ textDecoration: "none" }}>
+                        {message.username}
+                      </a>
+                    </h3>
+                  }
                 />
                 <p className="card-header">
                   <Link
                     to={`/profile/${message.username}`}
-                    style={{ fontWeight: 500 }}
+                    style={{ fontWeight: 500, textDecoration: "none" }}
                   >
                     {message.username}'s message on{" "}
-                    {new Date(parseInt(message.createdAt)).toString()}
+                    {new Date(parseInt(message.createdAt)).toLocaleDateString()}
                   </Link>{" "}
                 </p>
                 {message.image && (
