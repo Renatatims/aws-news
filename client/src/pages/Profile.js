@@ -7,6 +7,10 @@ import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import HomeIcon from "@mui/icons-material/Home";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
 
 const Profile = (props) => {
   const { username: userParam } = useParams();
@@ -39,9 +43,31 @@ const Profile = (props) => {
       <CssBaseline />
       <Container maxWidth="lg">
         <Box sx={{ bgcolor: "#d1c4e9", height: "100vh" }}>
-          <Typography variant="h3" gutterBottom>
-           {`${userParam}'s`} profile
-          </Typography>
+          <IconButton sx={{ pl: 1.75 }}>
+            <a href="/" style={{ textDecoration: "none" }}>
+              <HomeIcon />
+            </a>
+          </IconButton>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
+            sx={{
+              p: 1,
+            }}
+          >
+            <Avatar>
+              <a
+                href={`/profile/${userParam}`}
+                style={{ textDecoration: "none" }}
+              >
+                {userParam[0]}
+              </a>
+            </Avatar>
+            <Typography variant="h4" sx={{ color: "#6F7C80" }}>
+              {`${userParam}'s`} profile
+            </Typography>
+          </Stack>
           <div>
             <div align="center">
               {!isLoaded ? (
@@ -49,7 +75,11 @@ const Profile = (props) => {
               ) : (
                 <NewsList
                   messages={messages}
-                  title={`${userParam}'s messages...`}
+                  title={
+                    <p style={{ color: "white" }}>
+                      {`${userParam}'s messages...`}
+                    </p>
+                  }
                 />
               )}
             </div>
