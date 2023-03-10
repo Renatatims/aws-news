@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 const NewsForm = () => {
   const [formState, setFormState] = useState({
@@ -82,23 +83,30 @@ const NewsForm = () => {
       <form onSubmit={handleFormSubmit}>
         <Box
           sx={{
-            width: 500,
-            maxWidth: "100%",
-            pl: 3.5,
-            pr: 5,
+            width: 290,
+            pl: 2,
+            pr: 4,
             pt: 2,
             pb: 2,
-            m: 4,
+            m: 1.5,
             boxShadow: 4,
             bgcolor: "#f5f5f5",
-            borderRadius: 2
+            borderRadius: 2,
           }}
         >
-          <Typography variant="h7" sx={{
-            color: "#a594c7",
-            fontWeight: "bold"
-       
-          }}> Message </Typography>
+          <Typography
+            variant="h7"
+            sx={{
+              color: "#a594c7",
+              fontWeight: "bold",
+            }}
+          >
+            {" "}
+            Message{" "}
+          </Typography>
+
+          <p>Character Count: {characterCount}/250</p>
+
           <TextField
             fullWidth
             label="Name"
@@ -120,59 +128,67 @@ const NewsForm = () => {
               p: 1,
             }}
             multiline
-            rows={8}
+            rows={3}
             onChange={handleChange}
           />
-          <p>Character Count: {characterCount}/250</p>
+          {/*Click photo icon or "choose file" - user can choose the file to import - was file is chosen, click over the upload button to upload to S3 bucket*/}
           <Stack
             direction="row"
             alignItems="center"
-            spacing={2}
+            spacing={0}
             sx={{
-              p: 1,
+              p: 0,
             }}
           >
             <IconButton
               color="#b9adcf"
               aria-label="upload picture"
               component="label"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "transparent",
+                  cursor: "pointer"
+                },
+              }}
             >
               <PhotoCamera
                 sx={{
-                  p: 0.5,
+                  "&:hover": {
+                    color: "#a594c7",
+                  },
                 }}
               />
-              <input accept="image/*" type="file" ref={fileInput} />
+              <input
+                accept="image/*"
+                type="file"
+                ref={fileInput}
+                style={{ padding: "0px", margin: "0px", cursor: "pointer"}}
+              />
+              <CloudUploadIcon
+                onClick={handleImageUpload}
+                sx={{
+                  "&:hover": {
+                    color: "#a594c7",
+                  },
+                }}
+              />
             </IconButton>
-            <Button
-              variant="contained"
-              type="submit"
-              onClick={handleImageUpload}
-              sx={{
-                bgcolor: "#a594c7",
-                boxShadow: 4, 
-                ":hover": {
-                  bgcolor: "#7b6eac",
-                },
-              }}
-            >
-              Upload
-            </Button>
-
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{
-                bgcolor: "#a594c7",
-                boxShadow: 4,
-                ":hover": {
-                  bgcolor: "#7b6eac",
-                },
-              }}
-            >
-              Submit
-            </Button>
           </Stack>
+
+          {/*Submit button - submit message*/}
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              bgcolor: "#a594c7",
+              boxShadow: 4,
+              ":hover": {
+                bgcolor: "#7b6eac",
+              },
+            }}
+          >
+            Submit
+          </Button>
         </Box>
       </form>
     </div>
