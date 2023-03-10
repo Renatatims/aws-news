@@ -23,6 +23,21 @@ Application allows users to post messages and photos, using MongoDB, Express.js,
 
 Install Node.js and npm
 
+## Usage
+
+User can post messages and upload an image, using AWS S3 bucket.
+
+![Preview](assets/screenshots/Capture2.PNG)
+
+## Features
+ - Mobile friendly application
+ - Post news and messages
+ - Upload photos and images
+ - Posts will be saved in the home page and available in user's page as well.
+ - User's profile page shows all user's posts:
+![Preview](assets/screenshots/Capture3.PNG)
+
+
 ## Built With
 
  - React - JavaScript library for building user interfaces

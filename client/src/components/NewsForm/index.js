@@ -95,7 +95,7 @@ const NewsForm = () => {
           }}
         >
           <Typography
-            variant="h7"
+            variant="h6"
             sx={{
               color: "#a594c7",
               fontWeight: "bold",
@@ -138,6 +138,7 @@ const NewsForm = () => {
             spacing={0}
             sx={{
               p: 0,
+             
             }}
           >
             <IconButton
@@ -153,11 +154,12 @@ const NewsForm = () => {
             >
               <PhotoCamera
                 sx={{
-                  "&:hover": {
-                    color: "#a594c7",
+                  ":hover": {
+                    color: "#7b6eac",
                   },
                 }}
               />
+              </IconButton>
               <input
                 accept="image/*"
                 type="file"
@@ -167,12 +169,14 @@ const NewsForm = () => {
               <CloudUploadIcon
                 onClick={handleImageUpload}
                 sx={{
-                  "&:hover": {
-                    color: "#a594c7",
+                  color: "gray",
+                  ":hover": {
+                    color: "#7b6eac",
+                    cursor: "pointer"
+                    
                   },
                 }}
               />
-            </IconButton>
           </Stack>
 
           {/*Submit button - submit message*/}
